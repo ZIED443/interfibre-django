@@ -39,7 +39,7 @@ class ChambreAdmin(LeafletGeoAdmin):
 
       
       
-admin.site.register(chambre, ChambreAdmin)  
+admin.site.register(chambre, ChambreAdmin)             
 admin.site.register(NewUser, UserAdminConfig)
 admin.site.register(project,ProjectAdmin)
 

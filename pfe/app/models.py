@@ -1,10 +1,10 @@
 from django.contrib.gis.db import models
-from django.contrib.gis.db.models.fields import MultiPolygonField
 from django.db.models.deletion import SET_NULL
 from django.contrib.gis.db.models import PointField
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.conf import settings 
 
 
 class CustomAccountManager(BaseUserManager):
@@ -76,11 +76,3 @@ class chambre(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     location = PointField()    
     reference = models.CharField(max_length=200 , null=False)
-    
-    
-    
-    
-
-
-
-    

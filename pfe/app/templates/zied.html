@@ -11,16 +11,19 @@
   {% leaflet_css %}
 {% endblock %}
 
-     <div id="agrimap" style="height: 600px; width: 100%;"></div>
+     <div id="agrimap" style="height: 100% ; width:100%;"></div>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
- var map = L.map(‘agrimap’, { center: [-0.397783, 36.960936]zoom: 15, });
+var map = L.map('agrimap').setView([54.8,-4.45],6);
  var osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19,attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>' });
- var topo = L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', { maxZoom: 17, attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)' }); osm.addTo(map);
+//osm.addTo(map);
+map.addLayer(osm);
+
  var chambre= L.geoJson(null, {
  pointToLayer: function (feature, latlng) {
  return L.marker(latlng, {
  icon: L.icon({
- iconUrl: 'my-icon.png',
+ iconUrl: '/static/map-marker-icon.png',
  iconSize: [28, 32],
  iconAnchor: [12, 28],
  popupAnchor: [0, -25]
@@ -30,18 +33,15 @@
  });
  },
 }).addTo(map);
-var chambreUrl = 'chambre';
+var chambreUrl = 'http://127.0.0.1:8000/chambre/'; 
 $.getJSON(chambreUrl, function (data) {
  chambre.addData(data);
 });
 </script>
-{% block content %}
-  {% leaflet_map "spots" callback="window.map_init" %}
-{% endblock %}
+
  </body>
 
 
 
 
 </html>
-
