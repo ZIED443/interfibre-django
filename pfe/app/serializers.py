@@ -24,7 +24,5 @@ class ChambreSerializer(GeoFeatureModelSerializer):
     class Meta:
         model = chambre
         geo_field = "location"
-        # you can also explicitly declare which fields you want to include
-        # as with a ModelSerializer.
         fields = ['reference', 'created_at', 'project']                   
 
