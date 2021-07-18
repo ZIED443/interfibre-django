@@ -19,9 +19,12 @@ class HomePageView(TemplateView):
    template_name = 'zied.html'
    
 class ProjectList(generics.ListCreateAPIView):
-       queryset = project.objects.all()
+       #queryset = project.objects.all()
        serializer_class = ProjectSerializer
-
+       permission_classes= [IsAuthenticated,]
+       
+       def get_queryset(self):
+           return project.objects.filter(user=self.request.user) | project.objects.filter(tech_terrain=self.request.user)
 
 class ProjectUpdate(generics.RetrieveUpdateDestroyAPIView):
        queryset = project.objects.all()
@@ -31,6 +34,10 @@ class ChambreList(generics.ListCreateAPIView):
     
     queryset = chambre.objects.all()
     serializer_class = ChambreSerializer
+    
+class ChambreUpdate(generics.RetrieveUpdateDestroyAPIView):
+    
+    queryset = chambre.objects.all()
+    serializer_class = ChambreSerializer
      
-
-       
+      

@@ -5,8 +5,9 @@ urlpatterns = [
  path('', HomePageView.as_view(), name= 'home'),
  path('project/' , views.ProjectList.as_view()),
  path('project/<int:pk>' , views.ProjectUpdate.as_view()),
- path('chambrelist/' , views.ChambreList.as_view()),
- 
+ path('chambre/' , views.ChambreList.as_view()),
+  path('chambre/<int:pk>' , views.ChambreUpdate.as_view()),
+
   
 
 
