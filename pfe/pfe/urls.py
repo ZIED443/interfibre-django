@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
+from rest_framework.authtoken.views import obtain_auth_token  
+
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -29,6 +31,8 @@ urlpatterns = [
     path('', include('app.urls')),
     path('chambre/', include('app.urls')),
     path('api-auth/', include('rest_framework.urls')),
+    path('token-auth/', obtain_auth_token, name='api_token_auth'),  
+
     path('project/', include('app.urls')),
     path('schema/' , SpectacularAPIView.as_view() , name= 'schema'),
     path('docs/',SpectacularSwaggerView.as_view(url_name='schema'), name='docs'),

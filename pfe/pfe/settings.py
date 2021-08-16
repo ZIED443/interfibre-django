@@ -26,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-imc-1ny_7&_)w4e9yi!^e!1y7%_-i*x3(ab$zg_v3l#ezuu26r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -44,28 +44,30 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'rest_framework',
+    'rest_framework.authtoken',
     'rest_framework_gis',
-    'rest_framework_simplejwt',
     'drf_spectacular',
     'leaflet',
     'djgeojson',
     'app', 
     'corsheaders',
+    'import_export',
+
 
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+         #'rest_framework.authentication.BasicAuthentication',
+         #'rest_framework.authentication.SessionAuthentication',
+         #'rest_framework_simplejwt.authentication.JWTAuthentication',
 
     ],
         
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ],
    
         
@@ -143,7 +145,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -196,6 +199,8 @@ if os.name == 'nt':
 CORS_ALLOWED_ORIGINS = [
 
     "http://127.0.0.1:4200",
+    "http://192.168.137.1:8000",
+    
 ]
 
    
